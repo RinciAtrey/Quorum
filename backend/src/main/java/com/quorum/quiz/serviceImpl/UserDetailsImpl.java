@@ -23,8 +23,6 @@ public class UserDetailsImpl implements UserDetails {
         this.email = email;
     }
 
-    //Custom user implementation
-    //Convert User object into UserDetailsImpl for spring security
     public static UserDetailsImpl build(User user){
         return new UserDetailsImpl(
                 user.getId(),
@@ -33,7 +31,6 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail()
         );
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
