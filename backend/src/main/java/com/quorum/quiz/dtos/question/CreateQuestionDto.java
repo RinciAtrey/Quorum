@@ -8,7 +8,8 @@ import java.util.List;
 @Data
 public class CreateQuestionDto {
     private String title;
-    private String description;
-    private List<String> options;
     private LocalDateTime expiresAt;
+    // list of option objects with label and optional isCorrect
+    private List<OptionCreateDto> options;
 }
+
