@@ -1,7 +1,7 @@
 package com.quorum.quiz.service;
 
-import com.quorum.quiz.dtos.CreateQuestionDto;
-import com.quorum.quiz.dtos.QuestionResponseDto;
+import com.quorum.quiz.dtos.question.CreateQuestionDto;
+import com.quorum.quiz.dtos.question.QuestionResponseDto;
 import com.quorum.quiz.models.User;
 
 import java.util.List;

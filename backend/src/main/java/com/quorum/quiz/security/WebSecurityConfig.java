@@ -59,6 +59,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/questions/share/**").permitAll()
+                        .requestMatchers("/api/sessions**").permitAll()
                         .requestMatchers("/api/urls/**").authenticated()
                         .requestMatchers("/api/questions/**").authenticated()
                         .requestMatchers("/api/answers/**").authenticated()

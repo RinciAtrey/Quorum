@@ -30,11 +30,18 @@ public class AnswerServiceImpl implements AnswerService {
     private final AnswerRepository answerRepository;
     private final UserService userService;
 
+
     @Override
     @Transactional
     public void submitAnswer(String shareCode, AnswerRequest req, String username) {
+
+
         Question q = questionRepository.findByShareCode(shareCode)
                 .orElseThrow(() -> new NoSuchElementException("Question not found"));
+
+
+//        Question q = questionRepository.findByShareCode(shareCode)
+//                .orElseThrow(() -> new NoSuchElementException("Question not found"));
         if (!Boolean.TRUE.equals(q.getIsOpen())) throw new IllegalStateException("Question is closed");
 
         Option opt = optionRepository.findById(req.getOptionId())

@@ -1,7 +1,9 @@
 package com.quorum.quiz.serviceImpl;
-import com.quorum.quiz.dtos.CreateQuestionDto;
-import com.quorum.quiz.dtos.OptionDto;
-import com.quorum.quiz.dtos.QuestionResponseDto;
+
+import com.quorum.quiz.dtos.question.CreateQuestionDto;
+import com.quorum.quiz.dtos.question.OptionCreateDto;
+import com.quorum.quiz.dtos.question.OptionDto;
+import com.quorum.quiz.dtos.question.QuestionResponseDto;
 import com.quorum.quiz.models.Option;
 import com.quorum.quiz.models.Question;
 import com.quorum.quiz.models.User;
@@ -40,22 +42,22 @@ public class QuestionServiceImpl implements QuestionService {
         List<Option> savedOptions = new ArrayList<>();
         int pos = 0;
         if (dto.getOptions() != null) {
-            for (String label : dto.getOptions()) {
+            for (OptionCreateDto odto : dto.getOptions()) {
                 Option o = new Option();
-                o.setLabel(label);
+                o.setLabel(odto.getLabel());
                 o.setPosition(pos++);
                 o.setQuestion(q);
+                o.setIsCorrect(Boolean.TRUE.equals(odto.getIsCorrect()));
                 savedOptions.add(optionRepository.save(o));
             }
         }
-
-        return toResponseDto(q, savedOptions, user.getUsername());
+        return toResponseDto(q, savedOptions, user.getUsername(), true);
     }
 
     @Override
     public List<QuestionResponseDto> getQuestionsByUser(User user) {
         return questionRepository.findByCreatedBy(user).stream()
-                .map(q -> toResponseDto(q, Collections.emptyList(), user.getUsername()))
+                .map(q -> toResponseDto(q, Collections.emptyList(), user.getUsername(), true))
                 .collect(Collectors.toList());
     }
 
@@ -64,10 +66,10 @@ public class QuestionServiceImpl implements QuestionService {
         Question q = questionRepository.findByShareCodeWithOptions(shareCode)
                 .orElseThrow(() -> new NoSuchElementException("Question not found"));
         List<Option> opts = q.getOptions() == null ? Collections.emptyList() : q.getOptions();
-        return toResponseDto(q, opts, q.getCreatedBy().getUsername());
+        return toResponseDto(q, opts, q.getCreatedBy().getUsername(), false);
     }
 
-    private QuestionResponseDto toResponseDto(Question q, List<Option> options, String username) {
+    private QuestionResponseDto toResponseDto(Question q, List<Option> options, String username, boolean showCorrect) {
         QuestionResponseDto dto = new QuestionResponseDto();
         dto.setId(q.getId());
         dto.setTitle(q.getTitle());
@@ -85,6 +87,8 @@ public class QuestionServiceImpl implements QuestionService {
                     od.setLabel(o.getLabel());
                     od.setPosition(o.getPosition() == null ? 0 : o.getPosition());
                     od.setVotes(0L);
+                    if (showCorrect) od.setIsCorrect(Boolean.TRUE.equals(o.getIsCorrect()));
+                    else od.setIsCorrect(null); //will be omitted from JSON because of @JsonInclude
                     return od;
                 }).collect(Collectors.toList());
         dto.setOptions(optionDtos);

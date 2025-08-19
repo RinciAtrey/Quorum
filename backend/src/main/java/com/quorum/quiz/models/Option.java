@@ -13,10 +13,14 @@ public class Option {
 
     private String label;
 
+    private Boolean isCorrect= false;
+
     @Column(name = "position_idx")
     private Integer position = 0;
 
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
+
+
 }

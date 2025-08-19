@@ -1,4 +1,4 @@
-package com.quorum.quiz.dtos;
+package com.quorum.quiz.dtos.question;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.quorum.quiz.dtos;
+package com.quorum.quiz.dtos.question;
 
 import lombok.Data;
 
