@@ -39,7 +39,7 @@ const LoginPage = () => {
       }
      console.log("Login sucessful");
      
-      navigate("/");
+      navigate("\dashboard");
     } catch (err) {
       console.error("login error:", err);
       const serverMessage =

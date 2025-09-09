@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MainSection = () => {
   return (
@@ -19,10 +20,18 @@ const MainSection = () => {
             </p>
             <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+                <Link to={"/login"}>
                 <button className='flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-500 hover:bg-purple-700 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg hover:shadow-xl'>
                   Get Started
                 </button>
-                <button className="flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-black bg-white hover:bg-gray-200 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg hover:shadow-xl'">Sign In</button>
+                 </Link>
+
+                <Link to={"/login"}>
+                
+                <button className="flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-black bg-white hover:bg-gray-200 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg hover:shadow-xl'">
+                  Sign In
+                  </button>
+                  </Link>
               </div>
             </div>
           </div>

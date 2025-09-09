@@ -1,9 +1,12 @@
 import React from 'react'
+import DashboardLayout from '../layout/DashboardLayout'
 
-const Dashboard = () => {
+const Dashboard = ({ children }) => {
   return (
-    <div>
-      Dashboard
+    <div className="w-full">
+      <DashboardLayout activeMenu="Dashboard">
+        {/* optional children content */}
+      </DashboardLayout>
     </div>
   )
 }
